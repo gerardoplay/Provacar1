@@ -1,0 +1,74 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/textemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:text="Inserisci l'email (ES m.rossi@unisa.it)" />
+
+	<EditText
+	    android:id="@+id/reg.email"
+	    android:layout_width="260dp"
+	    android:layout_height="wrap_content"
+	    android:hint="@string/reghintemail"
+	    android:inputType="textEmailAddress" />
+
+	<TextView
+	    android:id="@+id/textpassoword"
+	    android:layout_width="227dp"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dp"
+	    android:text="Inserisci la password" />
+	    
+	<EditText
+	    android:id="@+id/reg.password"
+	    android:layout_width="254dp"
+	    android:layout_height="wrap_content"
+	    android:hint="@string/reghintpassword"
+	    android:inputType="textWebPassword" />
+
+	<TextView
+	    android:id="@+id/textpassowordconferma"
+	    android:layout_width="235dp"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dp"
+	    android:text="Reinserisci la password" />
+
+    <EditText
+        android:id="@+id/reg.confermapassword"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/reghintcofermapassword"
+        android:inputType="textWebPassword" />
+
+    <TextView
+        android:id="@+id/reg.info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+<LinearLayout 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="horizontal" >
+
+    
+    </LinearLayout>
+
+<Button
+    android:id="@+id/reg.conferma"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:text="@string/regconferma" />
+
+</LinearLayout>

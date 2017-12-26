@@ -1,0 +1,81 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical">
+
+    <ToggleButton
+        android:id="@+id/toggleButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="ToggleButton"
+        android:textOff="Ritorno"
+        android:textOn="Andata" />
+
+    <TextView
+        android:id="@+id/richiestainformazioni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="indica la data, l'orario e il luogo di partenza"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/richiestainfodata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="data"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/inserimentorichiestadatatext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/richiestainfoorario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="orario arrivo Unisa"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/inserimentorichiestaoratext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="time" />
+
+    <TextView
+        android:id="@+id/richiestainfoindirizzo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="indirizzo di partenza"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/inserimentorichiestaindirizzo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none" >
+   
+    </EditText>
+    
+    <Button
+    android:id="@+id/richiestaconferma"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Conferma" />
+    
+</LinearLayout>
+</ScrollView>

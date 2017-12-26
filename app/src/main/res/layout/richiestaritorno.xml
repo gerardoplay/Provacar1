@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/richiestainformazioni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="indica la data, l'orario e il luogo di destinazione"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/richiestainfodata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="data"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <DatePicker
+        android:id="@+id/datePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:spinnersShown="true"
+        android:startYear="2014" />
+
+    <TextView
+        android:id="@+id/richiestainfoorario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="orario partenza dall'università"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TimePicker
+        android:id="@+id/timePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/richiestainfoindirizzo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="indirizzo di destinazione"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/inserimentorichiestaindirizzo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="textPostalAddress" >
+
+        <requestFocus />
+    </EditText>
+    <Button
+    android:id="@+id/richiestaconferma"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Conferma" />
+    
+</LinearLayout>

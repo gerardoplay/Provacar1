@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MenuActivity" >
+
+    <Button
+        android:id="@+id/eventicompletati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/eventiprogrammati"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/eventiprogrammati"
+        android:text="@string/eventicompletati" />
+
+    <Button
+        android:id="@+id/eventiprogrammati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/eventicompletati"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/eventiprogrammati" />
+
+    <Button
+        android:id="@+id/menuinsrichiesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/eventiprogrammati"
+        android:layout_alignLeft="@+id/eventiprogrammati"
+        android:layout_alignRight="@+id/eventiprogrammati"
+        android:layout_marginBottom="28dp"
+        android:text="@string/inserimentorichiesta" />
+
+    <Button
+        android:id="@+id/menuinspercorso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/menuinsrichiesta"
+        android:layout_alignLeft="@+id/menuinsrichiesta"
+        android:layout_alignRight="@+id/menuinsrichiesta"
+        android:text="@string/inserimentopercorso" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Anidride non Immessa: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/anidridenn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:text="caricamento...."
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/costo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:text="caricamento..."
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/anidridenn"
+        android:layout_below="@+id/anidridenn"
+        android:text="Risparmiati:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/menuinspercorso"
+        android:layout_alignLeft="@+id/costo"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/anidridenn"
+        android:src="@drawable/logoapp" />
+   
+</RelativeLayout>
