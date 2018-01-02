@@ -13,8 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-// import com.google.android.gms.internal.r; se tolgo il commento cominciano a spuntare errori su tutti gli r. invece cosi funzianano tutti
-//import google.android.gms.R; (con questo funziona il getmap a riga 286 ma tutti gli r. smettono di funzionare)
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;

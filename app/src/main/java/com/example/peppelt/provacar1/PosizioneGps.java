@@ -2,7 +2,7 @@ package com.example.peppelt.provacar1;
 
 import java.io.IOException;
 import java.util.List;
-import com.example.provacar.R;
+import com.example.peppelt.provacar1.R;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;

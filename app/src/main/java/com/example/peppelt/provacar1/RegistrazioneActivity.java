@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.example.provacar.R;
+import com.example.peppelt.provacar1.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
