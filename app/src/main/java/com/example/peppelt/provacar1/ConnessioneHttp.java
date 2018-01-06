@@ -32,4 +32,3 @@ public class ConnessioneHttp {
 		return secure;
 	}
 }
-//al pop

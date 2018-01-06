@@ -22,6 +22,25 @@
             android:label="Carpooling UNISA" >
 
         </activity>
+        <activity
+            android:name="com.example.peppelt.provacar1.MenuActivity"
+            android:label="Carpooling UNISA" >
+        </activity>
+
+        <activity
+            android:name="com.example.peppelt.provacar1.InserimentoAutoActivity"
+            android:label="Carpooling UNISA" >
+        </activity>
+
+        <activity
+            android:name="com.example.peppelt.provacar1.InserimentoRichiestaActivity"
+            android:label="Carpooling UNISA" >
+        </activity>
+
+        <activity
+            android:name="com.example.peppelt.provacar1.EventiList"
+            android:label="Carpooling UNISA" >
+        </activity>
     </application>
 
     <uses-feature
