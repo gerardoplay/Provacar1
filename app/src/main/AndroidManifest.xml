@@ -46,6 +46,14 @@
             android:name="com.example.peppelt.provacar1.EventoActivity"
             android:label="Carpooling UNISA" >
         </activity>
+        <activity
+        android:name="com.example.peppelt.provacar1.PosizioneGps"
+        android:label="Carpooling UNISA" >
+        </activity>
+        <activity
+            android:name="com.example.peppelt.provacar1.InserimentoDettagliVeicoloActivity"
+            android:label="Carpooling UNISA" >
+        </activity>
     </application>
 
     <uses-feature
