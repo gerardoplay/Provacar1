@@ -87,7 +87,7 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 		// TODO Auto-generated method stub
 		try {
 			JSONObject js = new JSONObject(dati);
-			costo.setText(js.getDouble("costo")+" �");
+			costo.setText(js.getDouble("costo")+" €");
 			anidride.setText(js.getDouble("anidride")+" Kg");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
