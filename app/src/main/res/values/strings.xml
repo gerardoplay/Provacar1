@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_registrazione">Registrazionectivity</string>
-    <string name="host">http://192.168.6.9:8080/provaServer/</string>
+    <string name="host">http://192.168.1.102:8080/provaServer/</string>
     <string name="regconferma">Conferma</string>
     <string name="caricamento">Caricamento in corso</string>
     <string name="regnome">Nome</string>
@@ -104,6 +104,7 @@
     <string name="title_activity_evento">EventoActivity</string>
     <string name="feedback">Feedback</string>
     <string name="annullaric">Annulla Richiesta</string>
+    <string name="autobus">Visualizza alternativa bus</string>
     <string name="navigatore">Navigatore</string>
     <string name="annullaper">annulla viaggio</string>
     <string name="annullaperc">Annnulla Viaggio</string>
@@ -111,5 +112,6 @@
     <string name="partecipanti">Richieste</string>
     <string name="title_activity_feed_richieste">FeedRichiesteActivity</string>
     <string name="vuota">"   "</string>
+    <string name="title_activity_trasporto_alternativo">TrasportoAlternativoActivity</string>
 
 </resources>

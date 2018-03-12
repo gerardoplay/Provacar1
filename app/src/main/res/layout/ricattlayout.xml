@@ -63,6 +63,14 @@
         android:layout_alignRight="@+id/map"
         android:text="@string/annullaric" />
 
+    <Button
+        android:id="@+id/autobus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/map"
+        android:text="@string/autobus" />
+
     <TextView
         android:id="@+id/riepilogoinfotitolo"
         android:layout_width="wrap_content"

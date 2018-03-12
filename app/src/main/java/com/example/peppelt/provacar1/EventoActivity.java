@@ -48,6 +48,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private Button feed;
 	private Button annulla;
 	private Button annullaper;
+	private Button autobus;
 	private Button navigatore;
 	private TextView dataora;
 	private TextView distanza,indirizzotext;
@@ -79,12 +80,12 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		int stato = bb.getInt("stato");
 		//dialog = ProgressDialog.show(this, getString(R.string.attendi), getString(R.string.caricamento), false, false);
 
-		if(type.equalsIgnoreCase("ric")){
-			if(stato==1)
+		if(type.equalsIgnoreCase("ric")){  //richiedente percorso
+			if(stato==1)  // percorso completato
 				mode=1;
-			else
+			else           //non completato
 				mode=3;
-		}else{
+		}else{         //colui che inserisce il percorso
 			if(stato==1)
 				mode=2;
 			else 
@@ -108,7 +109,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 			feed =(Button)findViewById(R.id.feedback);
 			f = new Builder(EventoActivity.this);
 			f.setTitle("Feedback");
-			f.setMessage("Il percorso � stato rispettato?");
+			f.setMessage("Il percorso è stato rispettato?");
 			f.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
 				@Override
@@ -189,6 +190,8 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 			infotit.setText("Richiesta: ");
 			infocod.setText(cod);
 			annulla = (Button) findViewById(R.id.annullaric);
+			autobus = (Button) findViewById(R.id.autobus);
+
 			annulla.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -205,6 +208,25 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 					}
 				}
 			});
+
+
+			autobus.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+
+					Intent i = new Intent(EventoActivity.this ,TrasportoAlternativoActivity.class);
+					Bundle b = new Bundle();
+					b.putString("cod", cod);
+					i.putExtra("bundle", b);
+
+					Toast.makeText(getApplicationContext(), "codice :"+cod , Toast.LENGTH_LONG).show();
+					startActivity(i);
+				}
+			});
+
+
+
+
 			break;
 		case 4:
 

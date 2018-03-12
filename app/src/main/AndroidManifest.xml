@@ -1,5 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.peppelt.provacar1">
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.maps" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -7,10 +28,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name="com.example.peppelt.provacar1.MainActivity"
-            android:label="Carpooling UNISA" >
+            android:name=".MainActivity"
+            android:label="Carpooling UNISA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,82 +38,49 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.peppelt.provacar1.RegistrazioneActivity"
-            android:label="Carpooling UNISA" >
+            android:name=".RegistrazioneActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".MenuActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".InserimentoAutoActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".InserimentoRichiestaActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".EventiList"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".EventoActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".PosizioneGps"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".InserimentoDettagliVeicoloActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".FeedRichiesteActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".RiepilogoPercorsoActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".VisualizzaPercorsiActivity"
+            android:label="Carpooling UNISA"></activity>
+        <activity
+            android:name=".VisualizzaDettagliPercorso"
+            android:label="Carpooling UNISA"></activity>
 
-        </activity>
-        <activity
-            android:name="com.example.peppelt.provacar1.MenuActivity"
-            android:label="Carpooling UNISA" >
-        </activity>
-
-        <activity
-            android:name="com.example.peppelt.provacar1.InserimentoAutoActivity"
-            android:label="Carpooling UNISA" >
-        </activity>
-
-        <activity
-            android:name="com.example.peppelt.provacar1.InserimentoRichiestaActivity"
-            android:label="Carpooling UNISA" >
-        </activity>
-
-        <activity
-            android:name="com.example.peppelt.provacar1.EventiList"
-            android:label="Carpooling UNISA" >
-        </activity>
-
-        <activity
-            android:name="com.example.peppelt.provacar1.EventoActivity"
-            android:label="Carpooling UNISA" >
-        </activity>
-        <activity
-        android:name="com.example.peppelt.provacar1.PosizioneGps"
-        android:label="Carpooling UNISA" >
-        </activity>
-        <activity
-            android:name="com.example.peppelt.provacar1.InserimentoDettagliVeicoloActivity"
-            android:label="Carpooling UNISA" >
-        </activity>
-
-        <activity
-            android:name="com.example.peppelt.provacar1.FeedRichiesteActivity"
-            android:label="Carpooling UNISA" >
-        </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDvwSp5ut0H2u5eSIY2ob5JlzAArdyhI7g" />
 
         <activity
-            android:name="com.example.peppelt.provacar1.RiepilogoPercorsoActivity"
-            android:label="Carpooling UNISA" >
-        </activity>
-
-        <activity
-            android:name="com.example.peppelt.provacar1.VisualizzaPercorsiActivity"
-            android:label="Carpooling UNISA" >
-        </activity>
-        <activity
-            android:name="com.example.peppelt.provacar1.VisualizzaDettagliPercorso"
-            android:label="Carpooling UNISA" >
-        </activity>
-
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDvwSp5ut0H2u5eSIY2ob5JlzAArdyhI7g"/>
+            android:name=".TrasportoAlternativoActivity"
+            android:label="@string/title_activity_trasporto_alternativo"></activity>
     </application>
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.google.android.maps" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
 </manifest>
