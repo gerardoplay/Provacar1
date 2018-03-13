@@ -22,8 +22,9 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
         RequestHttpAsyncTask rh = new RequestHttpAsyncTask(TrasportoAlternativoActivity.this);
         try{
             JSONObject js = new JSONObject();
-            js.put("cod", codice);
             js.put("url", getString(R.string.host)+"servletTrasportoAlternativo");
+            js.put("cod", codice.toString());
+
             rh.execute(js);
         }catch(JSONException e){
             e.printStackTrace();
