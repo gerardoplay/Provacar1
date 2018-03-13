@@ -34,5 +34,6 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
     @Override
     public void onRemoteCallListenerComplete(String dati) {
         Toast.makeText(getApplicationContext(), "fattoo "+ codice, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), dati.toString(), Toast.LENGTH_LONG).show(); //da fare con json
     }
 }
