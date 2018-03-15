@@ -9,7 +9,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TrasportoAlternativoActivity extends Activity implements RemoteCallListener<String>{
-    String codice;
+    private String codice;
+    private String type;
+    private String data;
+    private String ora;
+    private String indirizzo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,10 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
             JSONObject js = new JSONObject();
             js.put("url", getString(R.string.host)+"servletTrasportoAlternativo");
             js.put("cod", codice.toString());
+            js.put("data", data.toString());
+            js.put("ora", ora.toString());
+            js.put("indirizzo", indirizzo.toString());
+            js.put("type", type.toString());
 
             rh.execute(js);
         }catch(JSONException e){
@@ -33,7 +41,20 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
 
     @Override
     public void onRemoteCallListenerComplete(String dati) {
-        Toast.makeText(getApplicationContext(), "fattoo "+ codice, Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(), dati.toString(), Toast.LENGTH_LONG).show(); //da fare con json
+        /*
+        if(dati.equalsIgnoreCase("ERROR"))
+            ab.setMessage(getString(R.string.erroredirete));
+
+        else
+        {*/
+            try{
+                int cod = new JSONObject(dati).getInt("cod");
+                Toast.makeText(getApplicationContext(),"il codice è"+ cod, Toast.LENGTH_LONG).show();
+            }
+            catch(JSONException e){
+                e.printStackTrace();
+
+            }
+       // }
     }
 }

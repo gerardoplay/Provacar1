@@ -58,6 +58,10 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private View infoindirizzo;
 	private String type;
 	private String cod;
+	private String data;
+	private String ora;
+
+
 	private Dialog feeddialog;
 	private int ffeed;
 	private AlertDialog alert;
@@ -77,6 +81,10 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 
 		type = bb.getString("type");
 		cod = bb.getString("cod");
+		indirizzo=bb.getString("indirizzo");
+		data=bb.getString("data");
+		ora=bb.getString("ora");
+
 		int stato = bb.getInt("stato");
 		//dialog = ProgressDialog.show(this, getString(R.string.attendi), getString(R.string.caricamento), false, false);
 
@@ -217,9 +225,14 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 					Intent i = new Intent(EventoActivity.this ,TrasportoAlternativoActivity.class);
 					Bundle b = new Bundle();
 					b.putString("cod", cod);
+					b.putString("type", type);
+					b.putString("indirizzo",indirizzo);
+					b.putString("data",data);
+					b.putString("ora",ora);
+
 					i.putExtra("bundle", b);
 
-					Toast.makeText(getApplicationContext(), "codice :"+cod , Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "codice :"+cod +"tipo"+type , Toast.LENGTH_LONG).show();
 					startActivity(i);
 				}
 			});
