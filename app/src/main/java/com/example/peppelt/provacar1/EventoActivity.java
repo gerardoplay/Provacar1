@@ -44,11 +44,11 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private int mode;// 1-ric comp   2-per comp 3ric ina 4 per ina 
 	private GoogleMap map;
 	private ProgressDialog dialog;
-	private String indirizzo;/////
+
 	private Button feed;
 	private Button annulla;
 	private Button annullaper;
-	private Button autobus;
+	private Button posAutista;
 	private Button navigatore;
 	private TextView dataora;
 	private TextView distanza,indirizzotext;
@@ -60,7 +60,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private String cod;
 	private String data;
 	private String ora;
-
+	private String indirizzo;/////
 
 	private Dialog feeddialog;
 	private int ffeed;
@@ -198,7 +198,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 			infotit.setText("Richiesta: ");
 			infocod.setText(cod);
 			annulla = (Button) findViewById(R.id.annullaric);
-			autobus = (Button) findViewById(R.id.autobus);
+			posAutista = (Button) findViewById(R.id.posAutista);
 
 			annulla.setOnClickListener(new OnClickListener() {
 
@@ -218,11 +218,11 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 			});
 
 
-			autobus.setOnClickListener(new OnClickListener() {
+			posAutista.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
 
-					Intent i = new Intent(EventoActivity.this ,TrasportoAlternativoActivity.class);
+					Intent i = new Intent(EventoActivity.this ,PosizioneAutista.class);
 					Bundle b = new Bundle();
 					b.putString("cod", cod);
 					b.putString("type", type);

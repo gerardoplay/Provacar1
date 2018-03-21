@@ -21,6 +21,10 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
         Intent i = getIntent();
         Bundle bb=i.getBundleExtra("bundle");
         codice = bb.getString("cod");
+        type = bb.getString("type");
+        data =bb.getString("data");
+        ora=bb.getString("ora");
+        indirizzo= bb.getString("indirizzo");
         Toast.makeText(getApplicationContext(), codice, Toast.LENGTH_LONG).show();
 
         RequestHttpAsyncTask rh = new RequestHttpAsyncTask(TrasportoAlternativoActivity.this);

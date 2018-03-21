@@ -39,40 +39,40 @@
         </activity>
         <activity
             android:name=".RegistrazioneActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".MenuActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".InserimentoAutoActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".InserimentoRichiestaActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".EventiList"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".EventoActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".PosizioneGps"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".InserimentoDettagliVeicoloActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".FeedRichiesteActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".RiepilogoPercorsoActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".VisualizzaPercorsiActivity"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
         <activity
             android:name=".VisualizzaDettagliPercorso"
-            android:label="Carpooling UNISA"></activity>
+            android:label="Carpooling UNISA" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -80,7 +80,10 @@
 
         <activity
             android:name=".TrasportoAlternativoActivity"
-            android:label="@string/title_activity_trasporto_alternativo"></activity>
+            android:label="@string/title_activity_trasporto_alternativo" />
+        <activity
+            android:name=".PosizioneAutista"
+            android:label="@string/title_activity_posizione_autista"></activity>
     </application>
 
 </manifest>
