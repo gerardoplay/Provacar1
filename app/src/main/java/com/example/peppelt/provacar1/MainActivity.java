@@ -69,7 +69,8 @@ public class MainActivity extends Activity implements RemoteCallListener<String>
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(getApplicationContext(),RegistrazioneActivity.class);
+				//Intent intent = new Intent(getApplicationContext(),RegistrazioneActivity.class);
+				Intent intent = new Intent(getApplicationContext(),PosizioneUtente.class);
 				startActivity(intent);
 			}
 		});

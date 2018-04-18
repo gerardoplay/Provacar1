@@ -3,8 +3,8 @@
     package="com.example.peppelt.provacar1">
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="23"
+        android:targetSdkVersion="26" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -74,6 +74,9 @@
             android:name=".VisualizzaDettagliPercorso"
             android:label="Carpooling UNISA" />
 
+        <activity
+            android:name=".PosizioneUtente"
+            android:label="Carpooling UNISA" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDvwSp5ut0H2u5eSIY2ob5JlzAArdyhI7g" />
