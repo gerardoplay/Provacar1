@@ -13,10 +13,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
+import android.Manifest;
 import android.app.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -131,6 +133,10 @@ private LatLng latlng;
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+				if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+						&& checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+					return;
+				}
 				lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,(long)1000,(float)3,PosizioneGps.this);
 			}
 		});

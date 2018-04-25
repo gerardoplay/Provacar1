@@ -192,7 +192,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		case 3:
 
 			setTitle("Richiesta Programmata");
-
+			Log.i("DEBUG", "Richiesta Programmata    aaaaa");
 			setContentView(R.layout.ricattlayout);
 			inizializzaComponent();
 			infotit.setText("Richiesta: ");
@@ -244,6 +244,8 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		case 4:
 
 			setTitle("Percorso Programmato");
+
+			Log.i("DEBUG", "Percorso Programmata "+ type);
 			setContentView(R.layout.perattlayout);
 			inizializzaComponent();
 			infotit.setText("Percorso: ");

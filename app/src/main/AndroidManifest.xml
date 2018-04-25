@@ -73,10 +73,10 @@
         <activity
             android:name=".VisualizzaDettagliPercorso"
             android:label="Carpooling UNISA" />
-
         <activity
             android:name=".PosizioneUtente"
             android:label="Carpooling UNISA" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDvwSp5ut0H2u5eSIY2ob5JlzAArdyhI7g" />
@@ -86,7 +86,12 @@
             android:label="@string/title_activity_trasporto_alternativo" />
         <activity
             android:name=".PosizioneAutista"
-            android:label="@string/title_activity_posizione_autista"></activity>
+            android:label="@string/title_activity_posizione_autista" />
+
+        <service
+            android:name=".LocationService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
