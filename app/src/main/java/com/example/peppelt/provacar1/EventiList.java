@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +32,8 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 	private JSONArray jsriccodici;
 	private JSONArray jsricdata;
 	private JSONArray jsricorario;
-
+	private JSONArray jsautista;
+    private JSONArray jscoddd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,11 +88,16 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 				jspercodici = js.getJSONArray("percodici");
 				jsperdata = js.getJSONArray("perdata");
 				jsperorario = js.getJSONArray("perorario");
-				
+				jsautista= js.getJSONArray("autista");
+				jscoddd=js.getJSONArray("coddd");
+
+
 				jsricindirizzo = js.getJSONArray("ricindirizzo");
 				jsriccodici = js.getJSONArray("riccodici");
 				jsricdata = js.getJSONArray("ricdata");
 				jsricorario = js.getJSONArray("ricorario");
+				jsautista = js.getJSONArray("autista");
+
 				for(int i =0; i<jspercodici.length();i++){
 					aa.add("Percorso: "+jspercodici.getString(i)+"\n Del: "+jsperdata.getString(i)+" alle:  "+jsperorario.getString(i));
 					aper.add(jspercodici.getString(i));
@@ -137,6 +144,10 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 							b.putString("indirizzo", jsricindirizzo.getString(arg2-aper.size()));
 							b.putString("data", jsricdata.getString(arg2-aper.size()));
 							b.putString("ora", jsricorario.getString(arg2-aper.size()));
+							b.putString("autista",jsautista.getString(arg2-aper.size()));
+							b.putString("percodice",jscoddd.getString(arg2-aper.size()));
+
+							//Toast.makeText(getApplicationContext(), "autista: "+jsautista.getString(arg2-aper.size()), Toast.LENGTH_LONG).show();
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -146,11 +157,14 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 					}
 					b.putString("cod", ind);
 					b.putString("type", type);
-					
+					;
+
+
 					b.putInt("stato", stato);
 					
 						//b.put(data);
-					
+
+
 					i.putExtra("bundle", b);
 					startActivityForResult(i, 12);
 				}

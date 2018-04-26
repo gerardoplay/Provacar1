@@ -18,14 +18,6 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/riepilogoinfotitolo" />
 
-    <TextView
-        android:id="@+id/riepilogotitolo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/riepilogoinfotitolo"
-        android:layout_alignRight="@+id/map"
-        android:text="@string/car"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
     <Button
@@ -43,6 +35,27 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/map"
         android:text="@string/autobus" />
+
+
+
+    <TextView
+        android:id="@+id/dataora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/map"
+        android:layout_alignLeft="@+id/map"
+        android:text="vuoto"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    <Button
+        android:id="@+id/aggiornaPosAutista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/map"
+        android:layout_alignRight="@id/map"
+        android:text="aggg" />
+
 
 
 </RelativeLayout>

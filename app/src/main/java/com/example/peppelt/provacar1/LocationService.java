@@ -83,8 +83,8 @@ public class LocationService extends Service implements RemoteCallListener<Strin
                     js.put("url", getString(R.string.host)+"servletPrendiPosizioneAutista");
                     js.put("lat", lat.toString());
                     js.put("lng", lng.toString());
-                    js.put("codAutista", "d");
-                    js.put("codPercorso", "1");
+                    js.put("codAutista", "b");
+                    js.put("codPercorso", "20");
                     rh.execute(js);
 
                 }catch(JSONException e){

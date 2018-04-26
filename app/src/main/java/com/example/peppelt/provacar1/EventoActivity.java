@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,8 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private String data;
 	private String ora;
 	private String indirizzo;/////
+	private String autista;
+	private String percodice;
 
 	private Dialog feeddialog;
 	private int ffeed;
@@ -84,7 +87,8 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		indirizzo=bb.getString("indirizzo");
 		data=bb.getString("data");
 		ora=bb.getString("ora");
-
+		autista=bb.getString("autista");
+		percodice=bb.getString("percodice");
 		int stato = bb.getInt("stato");
 		//dialog = ProgressDialog.show(this, getString(R.string.attendi), getString(R.string.caricamento), false, false);
 
@@ -229,10 +233,11 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 					b.putString("indirizzo",indirizzo);
 					b.putString("data",data);
 					b.putString("ora",ora);
-
+					b.putString("autista",autista);
+					b.putString("percodice",percodice);
 					i.putExtra("bundle", b);
 
-					Toast.makeText(getApplicationContext(), "codice :"+cod +"tipo"+type , Toast.LENGTH_LONG).show();
+					//Toast.makeText(getApplicationContext(), "cod :"+percodice , Toast.LENGTH_LONG).show();
 					startActivity(i);
 				}
 			});
