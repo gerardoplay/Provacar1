@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +30,15 @@ public class LocationService extends Service implements RemoteCallListener<Strin
     @Override
     public void onCreate() {
         Log.i(TAG, "Service onCreate");
+
+        /*
+        String cod="";
+        String autista="";
+        if(intent != null){
+             autista = intent.getStringExtra("autista");
+             cod = intent.getStringExtra("cod");
+        }
+        Toast.makeText(getApplicationContext(), "ci siamo: "+cod +autista, Toast.LENGTH_LONG).show();
 
         /*
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -66,7 +76,6 @@ public class LocationService extends Service implements RemoteCallListener<Strin
 
 
 
-
         listner=new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -83,8 +92,8 @@ public class LocationService extends Service implements RemoteCallListener<Strin
                     js.put("url", getString(R.string.host)+"servletPrendiPosizioneAutista");
                     js.put("lat", lat.toString());
                     js.put("lng", lng.toString());
-                    js.put("codAutista", "b");
-                    js.put("codPercorso", "20");
+                    js.put("codAutista", "a");
+                    js.put("codPercorso", "19");
                     rh.execute(js);
 
                 }catch(JSONException e){
@@ -113,7 +122,7 @@ public class LocationService extends Service implements RemoteCallListener<Strin
                     startActivity(i);
                 }
         };
-
+        Toast.makeText(getApplicationContext(), "ci siamo: ", Toast.LENGTH_LONG).show();
         locationManager=(LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,3000,0,listner);
 
@@ -139,4 +148,6 @@ public class LocationService extends Service implements RemoteCallListener<Strin
     public void onRemoteCallListenerComplete(String dati) {
 
     }
+
+
 }

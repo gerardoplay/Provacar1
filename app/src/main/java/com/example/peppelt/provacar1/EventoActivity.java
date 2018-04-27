@@ -51,6 +51,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private Button annullaper;
 	private Button posAutista;
 	private Button navigatore;
+	private Button inviaPos;
 	private TextView dataora;
 	private TextView distanza,indirizzotext;
 	private TextView infotit;
@@ -64,7 +65,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private String indirizzo;/////
 	private String autista;
 	private String percodice;
-
+	private String perautista;
 	private Dialog feeddialog;
 	private int ffeed;
 	private AlertDialog alert;
@@ -89,6 +90,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		ora=bb.getString("ora");
 		autista=bb.getString("autista");
 		percodice=bb.getString("percodice");
+		perautista=bb.getString("perautista");
 		int stato = bb.getInt("stato");
 		//dialog = ProgressDialog.show(this, getString(R.string.attendi), getString(R.string.caricamento), false, false);
 
@@ -257,6 +259,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 			infocod.setText(cod);
 			annullaper = (Button) findViewById(R.id.annullaper);
 			partecipanti = (Button) findViewById(R.id.partecipanti);
+			inviaPos=(Button)findViewById(R.id.inviaPosizione);
 			p = new Builder(EventoActivity.this);
 			p.setTitle("Percorso");
 
@@ -309,6 +312,21 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 
+				}
+			});
+
+			inviaPos.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent = new Intent(getApplicationContext(),PosizioneUtente.class);
+					Bundle b = new Bundle();
+					b.putString("cod", cod);
+					b.putString("autista",perautista);
+					intent.putExtra("bundle", b);
+
+					startActivity(intent);
 				}
 			});
 			break;

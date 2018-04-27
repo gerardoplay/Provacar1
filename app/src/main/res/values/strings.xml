@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_registrazione">Registrazionectivity</string>
-    <string name="host">http://192.168.1.102:8080/provaServer/</string>
+    <string name="host">http://192.168.1.104:8080/provaServer/</string>
     <string name="regconferma">Conferma</string>
     <string name="caricamento">Caricamento in corso</string>
     <string name="regnome">Nome</string>

@@ -89,4 +89,14 @@
         android:layout_alignRight="@+id/map"
         android:text="@string/partecipanti" />
 
+    <Button
+        android:id="@+id/inviaPosizione"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_toEndOf="@+id/nav"
+        android:text="invia posizione" />
+
 </RelativeLayout>

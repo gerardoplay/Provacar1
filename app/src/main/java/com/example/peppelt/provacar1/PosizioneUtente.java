@@ -36,13 +36,23 @@ public class PosizioneUtente extends Activity implements LocationListener {
     private TextView longitudine;
     private LocationManager locationManager;
     private LatLng latlng;
+    private String cod;
+    private String autista;
     //private FusedLocationProviderClient mFusedLocationClient;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
+        Bundle bb=i.getBundleExtra("bundle");
+        cod = bb.getString("cod");
+        autista=bb.getString("autista");
+
+
+
         setContentView(R.layout.visualizza_posizione_utente);
         Intent intent = getIntent();
-        Toast.makeText(getApplicationContext(), "provola", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), "provola", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "cod:"+cod+ "autista:"+autista, Toast.LENGTH_LONG).show();
         gc = new Geocoder(getApplicationContext());
         map = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
         LatLng latlngcentro = new LatLng(40.773720, 14.794522);
@@ -85,7 +95,7 @@ public class PosizioneUtente extends Activity implements LocationListener {
             } else {
 
 
-                Toast.makeText(getApplicationContext(), "permessi già ok prima", Toast.LENGTH_LONG).show();
+               //Toast.makeText(getApplicationContext(), "permessi già ok prima", Toast.LENGTH_LONG).show();
 
 
                 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -104,13 +114,17 @@ public class PosizioneUtente extends Activity implements LocationListener {
 
                     Log.i("DEBUG", "chiamo il service");
                     Intent intent1 = new Intent(this, LocationService.class);
+                    Bundle b = new Bundle();
+                    b.putString("cod", cod);
+                    b.putString("autista",autista);
+                    intent1.putExtra("bundle", b);
                     startService(intent1);
 
 
                 } else {
                     latitudine.setText("Provider non disponibile");
                     longitudine.setText("Provider non disponibile");
-                    Toast.makeText(getApplicationContext(), "gps non disp", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(), "gps non disp", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -128,7 +142,7 @@ public class PosizioneUtente extends Activity implements LocationListener {
 
 */
 
-        Toast.makeText(getApplicationContext(), "permessi ok", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), "permessi ok", Toast.LENGTH_LONG).show();
 
 
     }
@@ -140,6 +154,7 @@ public class PosizioneUtente extends Activity implements LocationListener {
         map.addMarker(mrk);
         map.moveCamera( CameraUpdateFactory.newLatLngZoom(latlng , 15.0f) );
         Toast.makeText(getApplicationContext(), "aggiorno la mappa", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "posizione inviata al passeggero", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -174,6 +189,10 @@ public class PosizioneUtente extends Activity implements LocationListener {
 
                         Log.i("DEBUG", "chiamo il service");
                         Intent intent = new Intent(this, LocationService.class);
+                        Bundle b = new Bundle();
+                        b.putString("cod", cod);
+                        b.putString("autista",autista);
+                        intent.putExtra("bundle", b);
                         startService(intent);
 
 
@@ -183,6 +202,10 @@ public class PosizioneUtente extends Activity implements LocationListener {
                         Toast.makeText(getApplicationContext(), "gps non disp", Toast.LENGTH_LONG).show();
                         Log.i("DEBUG", "chiamo il service");
                         Intent intent = new Intent(this, LocationService.class);
+                        Bundle b = new Bundle();
+                        b.putString("cod", cod);
+                        b.putString("autista",autista);
+                        intent.putExtra("bundle", b);
                         startService(intent);
                     }
 

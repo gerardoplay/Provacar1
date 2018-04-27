@@ -34,6 +34,8 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 	private JSONArray jsricorario;
 	private JSONArray jsautista;
     private JSONArray jscoddd;
+	private JSONArray jsperautista;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,7 +92,7 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 				jsperorario = js.getJSONArray("perorario");
 				jsautista= js.getJSONArray("autista");
 				jscoddd=js.getJSONArray("coddd");
-
+				jsperautista=js.getJSONArray("perautista");
 
 				jsricindirizzo = js.getJSONArray("ricindirizzo");
 				jsriccodici = js.getJSONArray("riccodici");
@@ -132,6 +134,7 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 							b.putString("indirizzo", jsdperindirizzo.getString(arg2));
 							b.putString("data", jsperdata.getString(arg2));
 							b.putString("ora", jsperorario.getString(arg2));
+							b.putString("perautista", jsperautista.getString(arg2));
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
