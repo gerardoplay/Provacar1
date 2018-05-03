@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,6 +26,8 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Ros on 17/04/2018.
  */
@@ -38,7 +41,6 @@ public class PosizioneUtente extends Activity implements LocationListener {
     private LatLng latlng;
     private String cod;
     private String autista;
-    //private FusedLocationProviderClient mFusedLocationClient;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +49,16 @@ public class PosizioneUtente extends Activity implements LocationListener {
         cod = bb.getString("cod");
         autista=bb.getString("autista");
 
+        SharedPreferences sharedPref = this.getSharedPreferences("posAutista", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("autista",autista);
+        editor.putString("cod",cod);
+        editor.commit();
 
 
         setContentView(R.layout.visualizza_posizione_utente);
         Intent intent = getIntent();
-       // Toast.makeText(getApplicationContext(), "provola", Toast.LENGTH_LONG).show();
+
         Toast.makeText(getApplicationContext(), "cod:"+cod+ "autista:"+autista, Toast.LENGTH_LONG).show();
         gc = new Geocoder(getApplicationContext());
         map = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -66,10 +73,7 @@ public class PosizioneUtente extends Activity implements LocationListener {
 
 
 
-
-       // Toast.makeText(getApplicationContext(), "provola1", Toast.LENGTH_LONG).show();
-
-            // Here, thisActivity is the current activity
+   // Here, thisActivity is the current activity
             if (ContextCompat.checkSelfPermission(getApplicationContext(),
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -113,38 +117,20 @@ public class PosizioneUtente extends Activity implements LocationListener {
                     aggiornaMappa();
 
                     Log.i("DEBUG", "chiamo il service");
-                    Intent intent1 = new Intent(this, LocationService.class);
-                    Bundle b = new Bundle();
-                    b.putString("cod", cod);
-                    b.putString("autista",autista);
-                    intent1.putExtra("bundle", b);
-                    startService(intent1);
+                     start_service();
 
 
                 } else {
                     latitudine.setText("Provider non disponibile");
                     longitudine.setText("Provider non disponibile");
                    // Toast.makeText(getApplicationContext(), "gps non disp", Toast.LENGTH_LONG).show();
+                   start_service();
                 }
 
 
 
                 // Permission has already been granted
             }
-
-
-/*
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getApplicationContext(), "permessi non disp", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-*/
-
-       // Toast.makeText(getApplicationContext(), "permessi ok", Toast.LENGTH_LONG).show();
-
-
     }
 
     protected void aggiornaMappa() {
@@ -156,7 +142,10 @@ public class PosizioneUtente extends Activity implements LocationListener {
         Toast.makeText(getApplicationContext(), "aggiorno la mappa", Toast.LENGTH_LONG).show();
         Toast.makeText(getApplicationContext(), "posizione inviata al passeggero", Toast.LENGTH_LONG).show();
     }
-
+    protected void start_service() {
+        Intent intent = new Intent(this,LocationService.class);
+        startService(intent);
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -188,25 +177,13 @@ public class PosizioneUtente extends Activity implements LocationListener {
                         aggiornaMappa();
 
                         Log.i("DEBUG", "chiamo il service");
-                        Intent intent = new Intent(this, LocationService.class);
-                        Bundle b = new Bundle();
-                        b.putString("cod", cod);
-                        b.putString("autista",autista);
-                        intent.putExtra("bundle", b);
-                        startService(intent);
-
-
+                       start_service();
                     } else {
                         latitudine.setText("Provider non disponibile");
                         longitudine.setText("Provider non disponibile");
                         Toast.makeText(getApplicationContext(), "gps non disp", Toast.LENGTH_LONG).show();
                         Log.i("DEBUG", "chiamo il service");
-                        Intent intent = new Intent(this, LocationService.class);
-                        Bundle b = new Bundle();
-                        b.putString("cod", cod);
-                        b.putString("autista",autista);
-                        intent.putExtra("bundle", b);
-                        startService(intent);
+                        start_service();
                     }
 
                 } else {
@@ -242,11 +219,23 @@ public class PosizioneUtente extends Activity implements LocationListener {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.i(TAG, " posutente onPause");
         try {
             locationManager.removeUpdates(this);
         }
         catch(Exception e){
             e.printStackTrace();}
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i(TAG, " posutente onStop");
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i(TAG, " posutente onDestroy");
     }
 
     @Override
@@ -264,8 +253,8 @@ public class PosizioneUtente extends Activity implements LocationListener {
     @Override
     public void onProviderEnabled(String provider) {
     }
-
     @Override
     public void onProviderDisabled(String provider) {
     }
+
 }

@@ -37,25 +37,4 @@
         android:text="@string/autobus" />
 
 
-
-    <TextView
-        android:id="@+id/dataora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/map"
-        android:layout_alignLeft="@+id/map"
-        android:text="vuoto"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
-    <Button
-        android:id="@+id/aggiornaPosAutista"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/map"
-        android:layout_alignRight="@id/map"
-        android:text="aggg" />
-
-
-
 </RelativeLayout>

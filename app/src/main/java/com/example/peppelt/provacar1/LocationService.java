@@ -10,14 +10,19 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LocationService extends Service implements RemoteCallListener<String>{
+    static final String ACTION_START ="com.example.peppelt.provacar1.LocationService.ACTION_START";
+
     public LocationService() {
     }
 
@@ -26,54 +31,46 @@ public class LocationService extends Service implements RemoteCallListener<Strin
 
     private static final String TAG = "LocationService";
 
+
+
     @SuppressLint("MissingPermission")
     @Override
     public void onCreate() {
         Log.i(TAG, "Service onCreate");
 
-        /*
-        String cod="";
-        String autista="";
-        if(intent != null){
-             autista = intent.getStringExtra("autista");
-             cod = intent.getStringExtra("cod");
-        }
-        Toast.makeText(getApplicationContext(), "ci siamo: "+cod +autista, Toast.LENGTH_LONG).show();
+        SharedPreferences sharedPref= getApplicationContext().getSharedPreferences("posAutista", Context.MODE_PRIVATE);
 
-        /*
+        final String autista =  sharedPref.getString("autista",null);
+        final String cod = sharedPref.getString("cod",null);
+        Log.i(TAG, " service : autista "+autista+" cod "+cod );
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        Double lat1= location.getLatitude();
-        Double lng1=location.getLongitude();
+        if (location != null) {
 
-        SharedPreferences pref = getSharedPreferences("CARPOOLING", MODE_PRIVATE);
-        String user = pref.getString("username", "-1");
+            Double lat= location.getLatitude();
+            Double lng=location.getLongitude();
+            LatLng latlng = new LatLng(lat,lng);
 
+            RequestHttpAsyncTask rh = new RequestHttpAsyncTask(LocationService.this);
+            try{
+                JSONObject js = new JSONObject();
+                js.put("url", getString(R.string.host)+"servletPrendiPosizioneAutista");
+                js.put("lat", lat.toString());
+                js.put("lng", lng.toString());
+                js.put("codAutista", autista);
+                js.put("codPercorso", cod);
+                rh.execute(js);
+                Log.i(TAG, "Service fatta la servlet in location");
+            }catch(JSONException e){
+                e.printStackTrace();
+            }
 
-        RequestHttpAsyncTask rh = new RequestHttpAsyncTask(LocationService.this);
-        try{
-            JSONObject js = new JSONObject();
-            js.put("url", getString(R.string.host)+"servletPrendiPosizioneAutista");
-            js.put("lat", lat1.toString());
-            js.put("lng", lng1.toString());
-            js.put("codAutista", user);
-            js.put("codPercorso", "222");
-            rh.execute(js);
-            Log.i(TAG, "Service fatta la servlet in location");
-        }catch(JSONException e){
-            e.printStackTrace();
+        } else {
+            Log.i("DEBUG", "pos non disp");
+
         }
-
-
-*/
-
-
-
-
-
-
-
 
 
         listner=new LocationListener() {
@@ -81,19 +78,17 @@ public class LocationService extends Service implements RemoteCallListener<Strin
             public void onLocationChanged(Location location) {
                 Double lat= location.getLatitude();
                 Double lng=location.getLongitude();
-//                                                        MOMENTANEO DA VEDERE COME PRENDERE IL NOME UTENTE DA MAINACTIVITY
-                SharedPreferences pref = getSharedPreferences("CARPOOLING", MODE_PRIVATE);
-                String user = pref.getString("username", "-1");
 
-                Log.i(TAG, "Location changed aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+                Log.i(TAG, "Location changed");
                 RequestHttpAsyncTask rh = new RequestHttpAsyncTask(LocationService.this);
                 try{
                     JSONObject js = new JSONObject();
                     js.put("url", getString(R.string.host)+"servletPrendiPosizioneAutista");
                     js.put("lat", lat.toString());
                     js.put("lng", lng.toString());
-                    js.put("codAutista", "a");
-                    js.put("codPercorso", "19");
+                    js.put("codAutista", autista);
+                    js.put("codPercorso", cod);
                     rh.execute(js);
 
                 }catch(JSONException e){
@@ -130,18 +125,21 @@ public class LocationService extends Service implements RemoteCallListener<Strin
     }
 
     @Override
-    public IBinder onBind(Intent arg0) {
+    public IBinder onBind(Intent intentt) {
         Log.i(TAG, "Service onBind");
+
         return null;
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-
+        Log.i(TAG, "Service fake onDestroy");
+        //super.onDestroy();
+/*
         if(locationManager!=null)
             locationManager.removeUpdates(listner);
         Log.i(TAG, "Service onDestroy");
+       */
     }
 
     @Override

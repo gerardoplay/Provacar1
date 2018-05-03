@@ -18,6 +18,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class PosizioneAutista extends Activity implements RemoteCallListener<String>{
     private Button autobus;
     private String type;
@@ -29,7 +32,6 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
     private String percodice;
     private GoogleMap map;
     private LatLng latlng;
-    private Button aggiornaPos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,19 +53,12 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
         LatLng latlngcentro = new LatLng(40.773720, 14.794522);
         map.moveCamera( CameraUpdateFactory.newLatLngZoom(latlngcentro , 8.0f) );
         autobus = (Button) findViewById(R.id.autobus);
-        aggiornaPos=(Button) findViewById(R.id.aggiornaPosAutista);
+
         //map.addCircle()
         richiediPos();
 
 
 
-        aggiornaPos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                richiediPos();
-            }
-        });
 
 
 
@@ -93,6 +88,23 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
                 startActivity(i);
             }
         });
+
+
+
+
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                   richiediPos();
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
 
 
     }
@@ -133,9 +145,9 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
 
 
 
-        map.addMarker(mrk.icon(BitmapDescriptorFactory.fromResource(R.drawable.utente_mark)));
-        map.moveCamera( CameraUpdateFactory.newLatLngZoom(latlng , 15.0f) );
-        Toast.makeText(getApplicationContext(), "aggiorno la mappa", Toast.LENGTH_LONG).show();
+        map.addMarker(mrk.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_mark)));
+        map.moveCamera( CameraUpdateFactory.newLatLngZoom(latlng , 11.0f) );
+        //Toast.makeText(getApplicationContext(), "aggiorno la mappa", Toast.LENGTH_LONG).show();
     }
 
     protected  void richiediPos(){
