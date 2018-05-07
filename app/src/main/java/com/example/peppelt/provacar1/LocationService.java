@@ -2,8 +2,10 @@ package com.example.peppelt.provacar1;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
@@ -37,6 +39,13 @@ public class LocationService extends Service implements RemoteCallListener<Strin
     @Override
     public void onCreate() {
         Log.i(TAG, "Service onCreate");
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.exemple.provacar1.onDestroy");
+        registerReceiver(receiver, filter);
+
+
+
 
         SharedPreferences sharedPref= getApplicationContext().getSharedPreferences("posAutista", Context.MODE_PRIVATE);
 
@@ -117,7 +126,7 @@ public class LocationService extends Service implements RemoteCallListener<Strin
                     startActivity(i);
                 }
         };
-        Toast.makeText(getApplicationContext(), "ci siamo: ", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), "ci siamo: ", Toast.LENGTH_LONG).show();
         locationManager=(LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,3000,0,listner);
 
@@ -131,6 +140,8 @@ public class LocationService extends Service implements RemoteCallListener<Strin
         return null;
     }
 
+
+
     @Override
     public void onDestroy() {
         Log.i(TAG, "Service fake onDestroy");
@@ -141,11 +152,33 @@ public class LocationService extends Service implements RemoteCallListener<Strin
         Log.i(TAG, "Service onDestroy");
        */
     }
+    public void Destroy() {
+        super.onDestroy();
+
+        if(locationManager!=null)
+            locationManager.removeUpdates(listner);
+        Log.i(TAG, "Service onDestroy");
+
+    }
 
     @Override
     public void onRemoteCallListenerComplete(String dati) {
 
     }
 
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String action = intent.getAction();
+            if(action.equals("com.exemple.provacar1.onDestroy")){
+                //action for sms received
+                unregisterReceiver(receiver);
+                Toast.makeText(getApplicationContext(), "è arrivato il broadcast message ", Toast.LENGTH_LONG).show();
+                Destroy();
+            }
+
+        }
+    };
 
 }

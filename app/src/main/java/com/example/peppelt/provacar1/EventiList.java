@@ -90,7 +90,8 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 				jspercodici = js.getJSONArray("percodici");
 				jsperdata = js.getJSONArray("perdata");
 				jsperorario = js.getJSONArray("perorario");
-				jsautista= js.getJSONArray("autista");
+
+				jsautista = js.getJSONArray("autista");
 				jscoddd=js.getJSONArray("coddd");
 				jsperautista=js.getJSONArray("perautista");
 
@@ -98,7 +99,7 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 				jsriccodici = js.getJSONArray("riccodici");
 				jsricdata = js.getJSONArray("ricdata");
 				jsricorario = js.getJSONArray("ricorario");
-				jsautista = js.getJSONArray("autista");
+
 
 				for(int i =0; i<jspercodici.length();i++){
 					aa.add("Percorso: "+jspercodici.getString(i)+"\n Del: "+jsperdata.getString(i)+" alle:  "+jsperorario.getString(i));

@@ -32,6 +32,7 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
     private String percodice;
     private GoogleMap map;
     private LatLng latlng;
+    private String dataold="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,9 +126,12 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
             String dataora = new JSONObject(dati).getString("data");
 
 
-            latlng = new LatLng(lat,lng);
-            aggiornaMappa();
 
+
+            latlng = new LatLng(lat,lng);
+            if(!dataora.equals(dataold))
+                  aggiornaMappa();
+            dataold=dataora;
 
             //Toast.makeText(getApplicationContext(),"lat "+lat+"lng "+lng +"dataora"+dataora, Toast.LENGTH_LONG).show();
         }

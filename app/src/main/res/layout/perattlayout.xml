@@ -94,9 +94,9 @@
         style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="50dp"
-        android:layout_toEndOf="@+id/nav"
+        android:layout_below="@+id/indirizzo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-52dp"
         android:text="invia posizione" />
 
 </RelativeLayout>

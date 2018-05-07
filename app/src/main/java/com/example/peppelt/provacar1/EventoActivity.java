@@ -22,8 +22,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.gson.Gson;
+
+import android.Manifest;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,6 +39,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -314,19 +322,45 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 
 				}
 			});
+			inviaPos.setEnabled(false);
+			// controllo i permessi
+			if(!runtime_permissions())
+				inviaPos.setEnabled(true);
+
+
+
 
 			inviaPos.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent intent = new Intent(getApplicationContext(),PosizioneUtente.class);
+				/*	Intent intent = new Intent(getApplicationContext(),PosizioneUtente.class);
 					Bundle b = new Bundle();
 					b.putString("cod", cod);
 					b.putString("autista",perautista);
 					intent.putExtra("bundle", b);
 
-					startActivity(intent);
+				*/
+				if(inviaPos.getText().toString().equals("invia posizione")) {
+					SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("posAutista", Context.MODE_PRIVATE);
+					SharedPreferences.Editor editor = sharedPref.edit();
+					editor.putString("autista", perautista);
+					editor.putString("cod", cod);
+					editor.commit();
+					Intent i = new Intent(getApplicationContext(), LocationService.class);
+					startService(i);
+
+					//startActivity(intent);
+
+					inviaPos.setText("interrompi invio pos");
+				}
+				else{
+					//qui bisogna interrompere il serices
+					stopService(new Intent(getApplicationContext(), LocationService.class));
+					sendStopBroadcastMessage();
+					inviaPos.setText("invia posizione");
+				}
 				}
 			});
 			break;
@@ -764,4 +798,55 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 
 		return poly;
 	}
+
+	//controllo permessi gps
+
+	private boolean runtime_permissions(){
+		if(Build.VERSION.SDK_INT >=23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=
+				PackageManager.PERMISSION_GRANTED&&ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=
+				PackageManager.PERMISSION_GRANTED){
+			requestPermissions(new  String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+			return true;
+		}
+		return false;
+	}
+
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if(requestCode == 100){
+			if( grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+				inviaPos.setEnabled(true);
+			}else {
+				runtime_permissions();
+			}
+		}
+	}
+	private void sendStopBroadcastMessage() {
+		Intent intent = new Intent();
+		// Set an action for the Intent
+		intent.setAction("com.exemple.provacar1.onDestroy");
+		// Put an integer value Intent to broadcast it
+		intent.putExtra("code",1);
+
+                /*
+                    public abstract void sendBroadcast (Intent intent)
+                        Broadcast the given intent to all interested BroadcastReceivers. This call
+                        is asynchronous; it returns immediately, and you will continue executing
+                        while the receivers are run. No results are propagated from receivers and
+                        receivers can not abort the broadcast. If you want to allow receivers to
+                        propagate results or abort the broadcast, you must send an ordered
+                        broadcast using sendOrderedBroadcast(Intent, String).
+
+                    Parameters
+                        intent : The Intent to broadcast; all receivers matching this Intent
+                            will receive the broadcast.
+                */
+		// Finally, send the broadcast
+		sendBroadcast(intent);
+		Toast.makeText(getApplicationContext(), "broadcast message inviato", Toast.LENGTH_LONG).show();
+	}
+
+
 }

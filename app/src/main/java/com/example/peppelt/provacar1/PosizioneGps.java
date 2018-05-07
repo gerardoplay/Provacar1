@@ -104,8 +104,9 @@ private LatLng latlng;
 					}
 					
 				} catch (Exception e) {
+					e.printStackTrace();
 					// TODO Auto-generated catch block
-					Toast.makeText(getApplicationContext(), "Errore", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Errore,si consiglia di riavviare il cellulare", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
