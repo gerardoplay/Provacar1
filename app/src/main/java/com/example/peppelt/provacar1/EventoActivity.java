@@ -13,8 +13,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -68,9 +66,12 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private View infoindirizzo;
 	private String type;
 	private String cod;
+	private String ar;
 	private String data;
 	private String ora;
 	private String indirizzo;/////
+	private String indlon;
+	private String indlat;
 	private String autista;
 	private String percodice;
 	private String perautista;
@@ -93,7 +94,10 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 
 		type = bb.getString("type");
 		cod = bb.getString("cod");
+		ar = bb.getString("ar");
 		indirizzo=bb.getString("indirizzo");
+		indlat = bb.getString("indlat");
+		indlon= bb.getString("indlon");
 		data=bb.getString("data");
 		ora=bb.getString("ora");
 		autista=bb.getString("autista");
@@ -239,15 +243,18 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 					Intent i = new Intent(EventoActivity.this ,PosizioneAutista.class);
 					Bundle b = new Bundle();
 					b.putString("cod", cod);
+					b.putString("ar", ar);
 					b.putString("type", type);
 					b.putString("indirizzo",indirizzo);
 					b.putString("data",data);
 					b.putString("ora",ora);
 					b.putString("autista",autista);
 					b.putString("percodice",percodice);
+					b.putString("indlat",indlat);
+					b.putString("indlon",indlon);
 					i.putExtra("bundle", b);
 
-					//Toast.makeText(getApplicationContext(), "cod :"+percodice , Toast.LENGTH_LONG).show();
+					//Toast.makeText(getApplicationContext(), "indlat :"+indlat + " indlon "+indlon, Toast.LENGTH_LONG).show();
 					startActivity(i);
 				}
 			});

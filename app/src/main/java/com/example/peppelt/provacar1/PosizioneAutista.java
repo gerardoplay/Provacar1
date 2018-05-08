@@ -25,9 +25,12 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
     private Button autobus;
     private String type;
     private String cod;
+    private String ar;
     private String data;
     private String ora;
     private String indirizzo;
+    private String indlat;
+    private String indlon;
     private String autista;
     private String percodice;
     private GoogleMap map;
@@ -43,10 +46,13 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
         type = bb.getString("type");
         cod = bb.getString("cod");
         indirizzo=bb.getString("indirizzo");
+        indlat=bb.getString("indlat");
+        indlon=bb.getString("indlon");
         data=bb.getString("data");
         ora=bb.getString("ora");
         autista=bb.getString("autista");
         percodice=bb.getString("percodice");
+        ar = bb.getString("ar");
 
         setContentView(R.layout.activity_posizione_autista);
 
@@ -81,11 +87,13 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
                 b.putString("indirizzo",indirizzo);
                 b.putString("data",data);
                 b.putString("ora",ora);
-
+                b.putString("ar",ar);
+                b.putString("indlat",indlat);
+                b.putString("indlon",indlon);
 
                 i.putExtra("bundle", b);
 
-                Toast.makeText(getApplicationContext(), "codice :"+cod +"tipo"+type , Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(), "codice :"+cod +"tipo"+type , Toast.LENGTH_LONG).show();
                 startActivity(i);
             }
         });

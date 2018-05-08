@@ -123,6 +123,11 @@ public class PosizioneUtente extends Activity implements LocationListener {
                 } else {
                     latitudine.setText("Provider non disponibile");
                     longitudine.setText("Provider non disponibile");
+                    Intent in = new Intent(this, LocationService.class);
+                    in.putExtra("cod", cod);
+                    in.putExtra("autista", autista);
+                    startService(in);
+
                    // Toast.makeText(getApplicationContext(), "gps non disp", Toast.LENGTH_LONG).show();
                    start_service();
                 }

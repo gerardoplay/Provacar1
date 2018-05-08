@@ -3,6 +3,7 @@ package com.example.peppelt.provacar1;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +36,9 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 	private JSONArray jsautista;
     private JSONArray jscoddd;
 	private JSONArray jsperautista;
+	private JSONArray ar;
+	private JSONArray indlat;
+	private JSONArray indlon;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +103,10 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 				jsriccodici = js.getJSONArray("riccodici");
 				jsricdata = js.getJSONArray("ricdata");
 				jsricorario = js.getJSONArray("ricorario");
+				ar=js.getJSONArray("ar");
+				indlat=js.getJSONArray("indlat");
+				indlon=js.getJSONArray("indlon");
+
 
 
 				for(int i =0; i<jspercodici.length();i++){
@@ -136,6 +144,7 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 							b.putString("data", jsperdata.getString(arg2));
 							b.putString("ora", jsperorario.getString(arg2));
 							b.putString("perautista", jsperautista.getString(arg2));
+
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -144,13 +153,15 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 						type = "per";
 					}else{
 						try {
-							
+
 							b.putString("indirizzo", jsricindirizzo.getString(arg2-aper.size()));
 							b.putString("data", jsricdata.getString(arg2-aper.size()));
 							b.putString("ora", jsricorario.getString(arg2-aper.size()));
 							b.putString("autista",jsautista.getString(arg2-aper.size()));
 							b.putString("percodice",jscoddd.getString(arg2-aper.size()));
-
+							b.putString("ar",ar.getString(arg2-aper.size()));
+							b.putString("indlat", indlat.getString(arg2-aper.size()));
+							b.putString("indlon", indlon.getString(arg2-aper.size()));
 							//Toast.makeText(getApplicationContext(), "autista: "+jsautista.getString(arg2-aper.size()), Toast.LENGTH_LONG).show();
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block

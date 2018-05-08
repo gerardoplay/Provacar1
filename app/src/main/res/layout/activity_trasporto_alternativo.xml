@@ -15,4 +15,11 @@ tools:context="com.example.peppelt.provacar1.TrasportoAlternativoActivity" >
     android:layout_alignParentTop="true" >
 
 </ListView>
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 </RelativeLayout>
