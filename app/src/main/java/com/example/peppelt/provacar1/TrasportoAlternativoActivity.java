@@ -4,6 +4,7 @@ import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -59,7 +60,7 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
         indlat=bb.getString("indlat");
         indlon=bb.getString("indlon");
         //Toast.makeText(getApplicationContext(), ar + " " + indlat + "  " + indlon, Toast.LENGTH_LONG).show();
-
+/*
         RequestHttpAsyncTask rh = new RequestHttpAsyncTask(TrasportoAlternativoActivity.this);
         try {
             JSONObject js = new JSONObject();
@@ -74,7 +75,7 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+*/
 
         // TRANSIT
 
@@ -88,12 +89,12 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
 
     @Override
     public void onRemoteCallListenerComplete(String dati) {
-        /*
+      /*
         if(dati.equalsIgnoreCase("ERROR"))
             ab.setMessage(getString(R.string.erroredirete));
 
         else
-        {*/
+        {   */
             try{
                 int cod = new JSONObject(dati).getInt("cod");
                 Toast.makeText(getApplicationContext(),"il codice è"+ cod, Toast.LENGTH_LONG).show();
@@ -107,7 +108,7 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
 
     private void loadHeroList() {
         // se ar==1 vuol dire che è un viaggio di andata verso l'unisa, else è un viaggio di ritorno quindi da unisa a casa
-        if(ar=="1"){
+        if(ar.equals("1")){
             partenzalat=indlat; //cordinate di casa del richiedente passaggio
             partenzalon=indlon;
             arrivolat="40.77372"; //cordinate di unisa

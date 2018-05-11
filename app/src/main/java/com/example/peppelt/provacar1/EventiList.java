@@ -162,7 +162,6 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 							b.putString("ar",ar.getString(arg2-aper.size()));
 							b.putString("indlat", indlat.getString(arg2-aper.size()));
 							b.putString("indlon", indlon.getString(arg2-aper.size()));
-							//Toast.makeText(getApplicationContext(), "autista: "+jsautista.getString(arg2-aper.size()), Toast.LENGTH_LONG).show();
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

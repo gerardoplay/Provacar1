@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -133,14 +134,15 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
             double lng = Double.parseDouble(new JSONObject(dati).getString("lng").toString());
             String dataora = new JSONObject(dati).getString("data");
 
-
-
-
-            latlng = new LatLng(lat,lng);
-            if(!dataora.equals(dataold))
-                  aggiornaMappa();
-            dataold=dataora;
-
+            if(lat!=0) {
+                latlng = new LatLng(lat, lng);
+                if (!dataora.equals(dataold))
+                    aggiornaMappa();
+                dataold = dataora;
+            }
+            else{ //far uscire un messaggio ma non con il toast perchè con il tread che pompa continuamente non va bene
+                //Toast.makeText(getApplicationContext(),"posizione autista non disponibile", Toast.LENGTH_LONG).show();
+            }
             //Toast.makeText(getApplicationContext(),"lat "+lat+"lng "+lng +"dataora"+dataora, Toast.LENGTH_LONG).show();
         }
         catch(JSONException e){

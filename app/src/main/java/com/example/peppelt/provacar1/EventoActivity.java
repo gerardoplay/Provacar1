@@ -701,7 +701,10 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 			}
 
 			distanza.setText(sDistance);
-			map.addPolyline(lineOptions);  
+
+			if(points!=null ){
+				map.addPolyline(lineOptions);
+			}
 
 			// conferma.setEnabled(true);
 		}           
