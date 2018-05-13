@@ -210,13 +210,14 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		case 3:
 
 			setTitle("Richiesta Programmata");
-			Log.i("DEBUG", "Richiesta Programmata    aaaaa");
+			//Log.i("DEBUG", "Richiesta Programmata    aaaaa");
 			setContentView(R.layout.ricattlayout);
 			inizializzaComponent();
 			infotit.setText("Richiesta: ");
 			infocod.setText(cod);
 			annulla = (Button) findViewById(R.id.annullaric);
 			posAutista = (Button) findViewById(R.id.posAutista);
+
 
 			annulla.setOnClickListener(new OnClickListener() {
 

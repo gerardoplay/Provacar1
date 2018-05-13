@@ -153,6 +153,7 @@ public class MainActivity extends Activity implements RemoteCallListener<String>
 					case(-1): 	Toast.makeText(getApplicationContext(), R.string.loginerrattivazione, Toast.LENGTH_LONG).show(); break;
 					case(0):	Toast.makeText(getApplicationContext(), "credenziali errate", Toast.LENGTH_LONG).show(); break;
 					case(1): 	Intent i = new Intent(getApplicationContext(),MenuActivity.class);
+					i.putExtra("user",username.getText().toString());
 					        startActivity(i);break;	
 					default: 	Toast.makeText(getApplicationContext(), "Errore imprevisto", Toast.LENGTH_LONG).show(); break;
 				}
