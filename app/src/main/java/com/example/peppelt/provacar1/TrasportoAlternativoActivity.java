@@ -25,12 +25,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class TrasportoAlternativoActivity extends Activity implements RemoteCallListener<String>{
-    private String codice;
+
     private String ar;
-    private String type;
-    private String data;
-    private String ora;
-    private String indirizzo;
+
     private String indlat;
     private String indlon;
     private String partenzalat;
@@ -51,15 +48,10 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
         setContentView(R.layout.activity_trasporto_alternativo);
         Intent i = getIntent();
         Bundle bb = i.getBundleExtra("bundle");
-        codice = bb.getString("cod");
         ar = bb.getString("ar");
-        type = bb.getString("type");
-        data = bb.getString("data");
-        ora = bb.getString("ora");
-        indirizzo = bb.getString("indirizzo");
         indlat=bb.getString("indlat");
         indlon=bb.getString("indlon");
-        //Toast.makeText(getApplicationContext(), ar + " " + indlat + "  " + indlon, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), ar + " " + indlat + "  " + indlon, Toast.LENGTH_LONG).show();
 /*
         RequestHttpAsyncTask rh = new RequestHttpAsyncTask(TrasportoAlternativoActivity.this);
         try {

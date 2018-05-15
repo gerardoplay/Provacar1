@@ -22,6 +22,9 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 	private Button evprogramma;
 	private Button evcompleti;
 	private TextView anidride, costo;
+	private String ar;
+	private String indlat;
+	private String indlon;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,6 +70,7 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
@@ -131,6 +135,12 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 
 
 		if(js.getString("data")!=null) {
+			 String codice=js.getString("cod");
+			 String data=js.getString("data");
+			 String partenza=js.getString("partenza");
+			 ar=js.getString("ar");
+			 indlat=js.getString("indlat");
+			 indlon=js.getString("indlon");
 			AlertDialog.Builder builder;
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
@@ -138,9 +148,19 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 				builder = new AlertDialog.Builder(this);
 			}
 			builder.setTitle("Percorso annullato")
-					.setMessage("il percorso "+js.getString("cod")+"del "+js.getString("data")+"da "+js.getString("partenza")+" non è più disponibile vuoi visualizzare i trasporti alternativi?")
+					.setMessage("il percorso "+codice+" del "+data+" da "+partenza+" non è più disponibile vuoi visualizzare i trasporti alternativi?")
 					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
+							Intent i = new Intent(MenuActivity.this ,TrasportoAlternativoActivity.class);
+							Bundle b = new Bundle();
+							b.putString("ar",ar);
+							b.putString("indlat",indlat);
+							b.putString("indlon",indlon);
+							i.putExtra("bundle", b);
+
+							// Toast.makeText(getApplicationContext(), "codice :"+cod +"tipo"+type , Toast.LENGTH_LONG).show();
+							startActivity(i);
+
 							// continue with delete
 						}
 					})
@@ -160,5 +180,6 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 }
