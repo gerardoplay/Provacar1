@@ -75,6 +75,8 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private String autista;
 	private String percodice;
 	private String perautista;
+	private String perstato;
+
 	private Dialog feeddialog;
 	private int ffeed;
 	private AlertDialog alert;
@@ -103,6 +105,8 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		autista=bb.getString("autista");
 		percodice=bb.getString("percodice");
 		perautista=bb.getString("perautista");
+		perstato=bb.getString("perstato");
+
 		int stato = bb.getInt("stato");
 		//dialog = ProgressDialog.show(this, getString(R.string.attendi), getString(R.string.caricamento), false, false);
 
@@ -218,6 +222,32 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 			annulla = (Button) findViewById(R.id.annullaric);
 			posAutista = (Button) findViewById(R.id.posAutista);
 
+			//nel caso il percorso è stato annullato compare la dialogbox
+			if(perstato.equals("annullato")) {
+				AlertDialog.Builder builder;
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+					builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+				} else {
+					builder = new AlertDialog.Builder(this);
+				}
+
+				builder.setTitle("Percorso annullato")
+						.setMessage("attenzione questo percorso è stato annullato, visualizza i trasporti alternativi")
+						.setIcon(android.R.drawable.ic_dialog_alert)
+						.setNegativeButton(android.R.string.no, null)
+						.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface arg0, int arg1) {
+								Intent in = new Intent(EventoActivity.this, TrasportoAlternativoActivity.class);
+								Bundle b = new Bundle();
+								b.putString("ar", ar);
+								b.putString("indlat", indlat);
+								b.putString("indlon", indlon);
+								in.putExtra("bundle", b);
+								startActivity(in);
+							}
+						});
+				builder.create().show();
+			}
 
 			annulla.setOnClickListener(new OnClickListener() {
 

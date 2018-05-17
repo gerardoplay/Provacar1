@@ -39,6 +39,8 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 	private JSONArray ar;
 	private JSONArray indlat;
 	private JSONArray indlon;
+	private JSONArray jsperstato;
+	private JSONArray jsperstato2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,8 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 				jspercodici = js.getJSONArray("percodici");
 				jsperdata = js.getJSONArray("perdata");
 				jsperorario = js.getJSONArray("perorario");
+				jsperstato = js.getJSONArray("perstato");
+				jsperstato2 = js.getJSONArray("perstato2");
 
 				jsautista = js.getJSONArray("autista");
 				jscoddd=js.getJSONArray("coddd");
@@ -110,11 +114,22 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 
 
 				for(int i =0; i<jspercodici.length();i++){
-					aa.add("Percorso: "+jspercodici.getString(i)+"\n Del: "+jsperdata.getString(i)+" alle:  "+jsperorario.getString(i));
+					if(jsperstato2.getString(i).equals("annullato")) {
+						aa.add("Percorso: " + jspercodici.getString(i)+" (viaggio annullato)" + "\n Del: " + jsperdata.getString(i) + " alle:  " + jsperorario.getString(i));
+					}
+					else{
+						aa.add("Percorso: " + jspercodici.getString(i) + "\n Del: " + jsperdata.getString(i) + " alle:  " + jsperorario.getString(i));
+					}
 					aper.add(jspercodici.getString(i));
 				}
 				for(int i =0; i<jsriccodici.length();i++){
-					aa.add("Richiesta: "+jsriccodici.getString(i)+"\n Del "+jsricdata.getString(i)+"   alle  "+jsricorario.getString(i));
+					//Log.i("DEBUG","stato di "+jsriccodici.getString(i)+" è "+jsperstato.getString(i));
+					if(jsperstato.getString(i).equals("annullato")) {
+						aa.add("Richiesta: " + jsriccodici.getString(i) +" (viaggio annullato)" +"\n Del " + jsricdata.getString(i) + "   alle  " + jsricorario.getString(i));
+					}
+					else{
+						aa.add("Richiesta: " + jsriccodici.getString(i) + "\n Del " + jsricdata.getString(i) + "   alle  " + jsricorario.getString(i));
+					}
 					aric.add(jsriccodici.getString(i));
 				}
 				if(jsriccodici.length()==0 && jspercodici.length()==0){
@@ -162,6 +177,7 @@ public class EventiList extends Activity implements RemoteCallListener<String> {
 							b.putString("ar",ar.getString(arg2-aper.size()));
 							b.putString("indlat", indlat.getString(arg2-aper.size()));
 							b.putString("indlon", indlon.getString(arg2-aper.size()));
+							b.putString("perstato", jsperstato.getString(arg2-aper.size()));
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

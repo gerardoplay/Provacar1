@@ -1,5 +1,6 @@
 package com.example.peppelt.provacar1;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,9 +10,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +25,14 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 	private Button evprogramma;
 	private Button evcompleti;
 	private TextView anidride, costo;
-	private String ar;
-	private String indlat;
-	private String indlon;
+
+	private JSONArray indlat;
+	private JSONArray indlon;
+	private JSONArray ar;
+	private JSONArray codice;
+	private JSONArray data;
+	private JSONArray partenza;
+	private int i=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,54 +137,74 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 		try {
 			JSONObject js = new JSONObject(dati);
 
+				codice = js.getJSONArray("cod");
+				data = js.getJSONArray("data");
+				partenza = js.getJSONArray("partenza");
+				ar = js.getJSONArray("ar");
+				indlat = js.getJSONArray("indlat");
+				indlon = js.getJSONArray("indlon");
 
-
-
-
-
-		if(js.getString("data")!=null) {
-			 String codice=js.getString("cod");
-			 String data=js.getString("data");
-			 String partenza=js.getString("partenza");
-			 ar=js.getString("ar");
-			 indlat=js.getString("indlat");
-			 indlon=js.getString("indlon");
 			AlertDialog.Builder builder;
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
 			} else {
 				builder = new AlertDialog.Builder(this);
 			}
-			builder.setTitle("Percorso annullato")
-					.setMessage("il percorso "+codice+" del "+data+" da "+partenza+" non è più disponibile vuoi visualizzare i trasporti alternativi?")
-					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							Intent i = new Intent(MenuActivity.this ,TrasportoAlternativoActivity.class);
-							Bundle b = new Bundle();
-							b.putString("ar",ar);
-							b.putString("indlat",indlat);
-							b.putString("indlon",indlon);
-							i.putExtra("bundle", b);
+			//se ci sono più percorsi annullati
+			if(codice.length()>1){
 
-							// Toast.makeText(getApplicationContext(), "codice :"+cod +"tipo"+type , Toast.LENGTH_LONG).show();
-							startActivity(i);
+					builder.setTitle("Percorsi annullati")
+							.setMessage("attenzione "+codice.length()+" percorsi sono stati annullati, controlla i tuoi percorsi programmati")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setNegativeButton(android.R.string.no, null)
+							.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface arg0, int arg1) {
+									Intent i = new Intent(getApplicationContext(),EventiList.class);
+									Bundle b = new Bundle();
+									b.putInt("stato", 0);
+									i.putExtra("bundle", b);
+									startActivity(i);
+								}
+							});
 
-							// continue with delete
-						}
-					})
-					.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							// do nothing
-						}
-					})
-					.setIcon(android.R.drawable.ic_dialog_alert)
-					.show();
-		}
+				builder.create().show();
+			}
+		//se ci sta solo una richiesta annullata
+		 else {
+
+					builder.setTitle("Percorso annullato")
+							.setMessage("il percorso " + codice.getString(0) + " del " + data.getString(0) + " da " + partenza.getString(0) + " non è più disponibile vuoi visualizzare i trasporti alternativi?")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setNegativeButton(android.R.string.no, null)
+							.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface arg0, int arg1) {
+									Intent in = new Intent(MenuActivity.this, TrasportoAlternativoActivity.class);
+									Bundle b = new Bundle();
+									try {
+										b.putString("ar", ar.getString(0));
+										b.putString("indlat", indlat.getString(0));
+										b.putString("indlon", indlon.getString(0));
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									in.putExtra("bundle", b);
+
+									// Toast.makeText(getApplicationContext(), "codice :"+cod +"tipo"+type , Toast.LENGTH_LONG).show();
+									startActivity(in);
+
+									// continue with delete
+								}
+							});
 
 
 
-			Toast.makeText(getApplicationContext(),"il viaggio del "+ js.getString("data")+" è stato annullato", Toast.LENGTH_LONG).show();
-		} catch (JSONException e) {
+				builder.create().show();
+				//Toast.makeText(getApplicationContext(),"il viaggio del "+ js.getString("data")+" è stato annullato", Toast.LENGTH_LONG).show();
+
+				//}
+
+			}} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
