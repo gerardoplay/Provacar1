@@ -81,11 +81,15 @@
             android:value="AIzaSyDvwSp5ut0H2u5eSIY2ob5JlzAArdyhI7g" />
 
         <activity
-            android:name=".TrasportoAlternativoActivity"
+            android:name=".GoogleTransitActivity"
             android:label="@string/title_activity_trasporto_alternativo" />
         <activity
             android:name=".PosizioneAutista"
             android:label="@string/title_activity_posizione_autista" />
+
+        <activity
+            android:name=".ListaBusActivity"
+            android:label="Carpooling UNISA" />
 
         <service
             android:name=".LocationService"

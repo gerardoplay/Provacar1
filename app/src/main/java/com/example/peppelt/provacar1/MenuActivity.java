@@ -178,7 +178,7 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 							.setNegativeButton(android.R.string.no, null)
 							.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface arg0, int arg1) {
-									Intent in = new Intent(MenuActivity.this, TrasportoAlternativoActivity.class);
+									Intent in = new Intent(MenuActivity.this, ListaBusActivity.class);
 									Bundle b = new Bundle();
 									try {
 										b.putString("ar", ar.getString(0));

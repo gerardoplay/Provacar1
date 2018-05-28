@@ -81,10 +81,9 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(PosizioneAutista.this ,TrasportoAlternativoActivity.class);
+                Intent i = new Intent(PosizioneAutista.this ,ListaBusActivity.class);
                 Bundle b = new Bundle();
                 b.putString("cod", cod);
-                b.putString("type", type);
                 b.putString("indirizzo",indirizzo);
                 b.putString("data",data);
                 b.putString("ora",ora);

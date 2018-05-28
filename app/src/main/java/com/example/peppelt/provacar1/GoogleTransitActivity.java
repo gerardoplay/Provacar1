@@ -24,7 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-public class TrasportoAlternativoActivity extends Activity implements RemoteCallListener<String>{
+public class GoogleTransitActivity extends Activity {
 
     private String ar;
 
@@ -52,22 +52,6 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
         indlat=bb.getString("indlat");
         indlon=bb.getString("indlon");
         Toast.makeText(getApplicationContext(), ar + " " + indlat + "  " + indlon, Toast.LENGTH_LONG).show();
-/*
-        RequestHttpAsyncTask rh = new RequestHttpAsyncTask(TrasportoAlternativoActivity.this);
-        try {
-            JSONObject js = new JSONObject();
-            js.put("url", getString(R.string.host) + "servletTrasportoAlternativo");
-            js.put("cod", codice.toString());
-            js.put("data", data.toString());
-            js.put("ora", ora.toString());
-            js.put("indirizzo", indirizzo.toString());
-            js.put("type", type.toString());
-
-            rh.execute(js);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-*/
 
         // TRANSIT
 
@@ -78,26 +62,6 @@ public class TrasportoAlternativoActivity extends Activity implements RemoteCall
         //this method will fetch and parse the data
         loadHeroList();
     }
-
-    @Override
-    public void onRemoteCallListenerComplete(String dati) {
-      /*
-        if(dati.equalsIgnoreCase("ERROR"))
-            ab.setMessage(getString(R.string.erroredirete));
-
-        else
-        {   */
-            try{
-                int cod = new JSONObject(dati).getInt("cod");
-                Toast.makeText(getApplicationContext(),"il codice è"+ cod, Toast.LENGTH_LONG).show();
-            }
-            catch(JSONException e){
-                e.printStackTrace();
-
-            }
-       // }
-    }
-
     private void loadHeroList() {
         // se ar==1 vuol dire che è un viaggio di andata verso l'unisa, else è un viaggio di ritorno quindi da unisa a casa
         if(ar.equals("1")){

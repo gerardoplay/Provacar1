@@ -88,6 +88,8 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 	private Button partecipanti;
 	private Builder p;
 	private JSONArray indirizziRichiedenti;
+
+	private AlertDialog.Builder builder;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
@@ -106,6 +108,13 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		percodice=bb.getString("percodice");
 		perautista=bb.getString("perautista");
 		perstato=bb.getString("perstato");
+
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+		} else {
+			builder = new AlertDialog.Builder(this);
+		}
 
 		int stato = bb.getInt("stato");
 		//dialog = ProgressDialog.show(this, getString(R.string.attendi), getString(R.string.caricamento), false, false);
@@ -224,12 +233,6 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 
 			//nel caso il percorso è stato annullato compare la dialogbox
 			if(perstato.equals("annullato")) {
-				AlertDialog.Builder builder;
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-					builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-				} else {
-					builder = new AlertDialog.Builder(this);
-				}
 
 				builder.setTitle("Percorso annullato")
 						.setMessage("attenzione questo percorso è stato annullato, visualizza i trasporti alternativi")
@@ -237,7 +240,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 						.setNegativeButton(android.R.string.no, null)
 						.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface arg0, int arg1) {
-								Intent in = new Intent(EventoActivity.this, TrasportoAlternativoActivity.class);
+								Intent in = new Intent(EventoActivity.this, ListaBusActivity.class);
 								Bundle b = new Bundle();
 								b.putString("ar", ar);
 								b.putString("indlat", indlat);
@@ -338,19 +341,28 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					RequestHttpAsyncTask rh= new RequestHttpAsyncTask(EventoActivity.this);
-					JSONObject js = new JSONObject();
-					try{
-						js.put("cod", cod);
-						js.put("url", getString(R.string.host)+"servletAnnullaPercorso");
-						rh.execute(js);
-					}catch(JSONException E){
 
-					}
+					builder.setTitle("Attenzione!")
+							.setMessage("sei sicuro di voler annullare il percorso? i passeggeri riceveranno una notifica")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setNegativeButton(android.R.string.no, null)
+							.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface arg0, int arg1) {
+									RequestHttpAsyncTask rh= new RequestHttpAsyncTask(EventoActivity.this);
+									JSONObject js = new JSONObject();
+									try{
+										js.put("cod", cod);
+										js.put("url", getString(R.string.host)+"servletAnnullaPercorso");
+										rh.execute(js);
+									}catch(JSONException E){
 
+									}
+								}
+							});
+					builder.create().show();
 				}
 			});
+
 			navigatore = (Button) findViewById(R.id.nav);
 			navigatore.setOnClickListener(new OnClickListener() {
 
