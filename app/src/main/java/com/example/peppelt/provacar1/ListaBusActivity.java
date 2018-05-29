@@ -3,6 +3,7 @@ package com.example.peppelt.provacar1;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,7 +43,7 @@ public class ListaBusActivity extends Activity implements RemoteCallListener<Str
     private JSONArray dataPercorsi;
     private JSONArray oraArrivoPercorsi;
     private JSONArray oraPartenzaPercorsi;
-    private JSONArray numeroPullman;
+    private JSONArray numeroAutobus;
 
     //the URL having the json data
     private String JSON_URL = " ";
@@ -110,10 +111,10 @@ public class ListaBusActivity extends Activity implements RemoteCallListener<Str
                  dataPercorsi = js.getJSONArray("dataPercorsi");
                  oraArrivoPercorsi = js.getJSONArray("oraArrivo");
                  oraPartenzaPercorsi = js.getJSONArray("oraPartenza");
-                 numeroPullman = js.getJSONArray("numero");
+                 numeroAutobus = js.getJSONArray("numero");
 
                  for (int i = 0; i < codPercorsi.length(); i++) {
-                     aa.add("pullman n°" + numeroPullman.getString(i) + " partenza:" + oraPartenzaPercorsi.getString(i));
+                     aa.add("Autobus n°" + numeroAutobus.getString(i) + " partenza:" + oraPartenzaPercorsi.getString(i));
                  }
              }
 
@@ -144,7 +145,21 @@ public class ListaBusActivity extends Activity implements RemoteCallListener<Str
 // le varie soluzioni della servlet che rimandano ad un'activity con i dettagli del percorso cliccato
             else {
 
+                    Intent i = new Intent(ListaBusActivity.this ,DettagliPercorsoAutobusActivity.class);
+                    Bundle b = new Bundle();
+                    try {
+                        b.putString("codPercorso", codPercorsi.getString(arg2-1));
+                        b.putString("dataPercorso", dataPercorsi.getString(arg2-1));
+                        b.putString("oraArrivo", oraArrivoPercorsi.getString(arg2-1));
+                        b.putString("oraPartenza", oraPartenzaPercorsi.getString(arg2-1));
+                        b.putString("numeroAutobus", numeroAutobus.getString(arg2-1));
+                        i.putExtra("bundle", b);
+                        startActivity(i);
+                    }
+                    catch(JSONException e){
+                        e.printStackTrace();
 
+                    }
                 }
 
             }

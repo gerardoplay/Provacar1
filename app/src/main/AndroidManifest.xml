@@ -90,6 +90,9 @@
         <activity
             android:name=".ListaBusActivity"
             android:label="Carpooling UNISA" />
+        <activity
+            android:name=".DettagliPercorsoAutobusActivity"
+            android:label="Carpooling UNISA" />
 
         <service
             android:name=".LocationService"
