@@ -693,7 +693,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 
 		}       
 	}
-	private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
+	public class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
 
 
 		@Override
