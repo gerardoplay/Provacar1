@@ -245,6 +245,9 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 								b.putString("ar", ar);
 								b.putString("indlat", indlat);
 								b.putString("indlon", indlon);
+								b.putString("data", data);
+								b.putString("ora", ora);
+
 								in.putExtra("bundle", b);
 								startActivity(in);
 							}

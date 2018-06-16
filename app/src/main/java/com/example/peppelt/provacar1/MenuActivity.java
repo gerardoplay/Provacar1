@@ -32,6 +32,7 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 	private JSONArray codice;
 	private JSONArray data;
 	private JSONArray partenza;
+	private JSONArray ora;
 	private int i=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +144,8 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 				ar = js.getJSONArray("ar");
 				indlat = js.getJSONArray("indlat");
 				indlon = js.getJSONArray("indlon");
+			    ora = js.getJSONArray("ora");
+
 
 			AlertDialog.Builder builder;
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -184,6 +187,11 @@ public class MenuActivity extends Activity implements RemoteCallListener<String>
 										b.putString("ar", ar.getString(0));
 										b.putString("indlat", indlat.getString(0));
 										b.putString("indlon", indlon.getString(0));
+										b.putString("data",data.getString(0));
+										b.putString("ora",ora.getString(0));
+
+
+
 									} catch (JSONException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();

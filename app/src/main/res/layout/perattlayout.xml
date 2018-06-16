@@ -59,8 +59,8 @@
         android:id="@+id/annullaper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/partecipanti"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/map"
         android:text="@string/annullaperc" />
 
     <TextView
@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:text="@string/navigatore" />
 
     <Button
@@ -94,9 +94,9 @@
         style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/indirizzo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
+        android:layout_toStartOf="@+id/annullaper"
         android:text="invia posizione" />
 
 </RelativeLayout>

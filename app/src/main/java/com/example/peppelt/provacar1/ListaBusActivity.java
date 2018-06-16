@@ -34,11 +34,8 @@ public class ListaBusActivity extends Activity implements RemoteCallListener<Str
     private String ar;
     private String indlat;
     private String indlon;
-    private String codice;
     private String data;
     private String ora;
-    private String indirizzo;
-
     private JSONArray codPercorsi;
     private JSONArray dataPercorsi;
     private JSONArray oraArrivoPercorsi;
@@ -60,8 +57,6 @@ public class ListaBusActivity extends Activity implements RemoteCallListener<Str
         ar = bb.getString("ar");
         indlat = bb.getString("indlat");
         indlon = bb.getString("indlon");
-        codice = bb.getString("cod");
-        indirizzo = bb.getString("indirizzo");
         data=bb.getString("data");
         ora=bb.getString("ora");
 
@@ -79,10 +74,8 @@ public class ListaBusActivity extends Activity implements RemoteCallListener<Str
         try {
             JSONObject js = new JSONObject();
             js.put("url", getString(R.string.host) + "servletTrasportoAlternativo");
-            js.put("cod", codice.toString());
             js.put("data", data.toString());
             js.put("ora", ora.toString());
-            js.put("indirizzo", indirizzo.toString());
             js.put("ar", ar.toString());
             js.put("indlat", indlat.toString());
             js.put("indlon", indlon.toString());

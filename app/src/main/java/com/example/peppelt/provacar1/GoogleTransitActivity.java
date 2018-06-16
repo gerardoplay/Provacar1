@@ -51,7 +51,7 @@ public class GoogleTransitActivity extends Activity {
         ar = bb.getString("ar");
         indlat=bb.getString("indlat");
         indlon=bb.getString("indlon");
-        Toast.makeText(getApplicationContext(), ar + " " + indlat + "  " + indlon, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), ar + " " + indlat + "  " + indlon, Toast.LENGTH_LONG).show();
 
         // TRANSIT
 
