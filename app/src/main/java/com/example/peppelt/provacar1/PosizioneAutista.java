@@ -155,9 +155,6 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
         // TODO Auto-generated method stub
         map.clear();
         MarkerOptions mrk = new MarkerOptions().position(latlng);
-
-
-
         map.addMarker(mrk.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_mark)));
         map.moveCamera( CameraUpdateFactory.newLatLngZoom(latlng , 13.0f) );
         //Toast.makeText(getApplicationContext(), "aggiorno la mappa", Toast.LENGTH_LONG).show();

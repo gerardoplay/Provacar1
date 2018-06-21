@@ -28,12 +28,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by Ros on 17/04/2018.
- */
 
 public class PosizioneUtente extends Activity implements LocationListener {
-    private Geocoder gc;
     private GoogleMap map;
     private TextView latitudine;
     private TextView longitudine;
@@ -60,7 +56,6 @@ public class PosizioneUtente extends Activity implements LocationListener {
         Intent intent = getIntent();
 
         Toast.makeText(getApplicationContext(), "cod:"+cod+ "autista:"+autista, Toast.LENGTH_LONG).show();
-        gc = new Geocoder(getApplicationContext());
         map = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
         LatLng latlngcentro = new LatLng(40.773720, 14.794522);
         map.moveCamera( CameraUpdateFactory.newLatLngZoom(latlngcentro , 8.0f) );
@@ -73,7 +68,7 @@ public class PosizioneUtente extends Activity implements LocationListener {
 
 
 
-   // Here, thisActivity is the current activity
+
             if (ContextCompat.checkSelfPermission(getApplicationContext(),
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -123,11 +118,11 @@ public class PosizioneUtente extends Activity implements LocationListener {
                 } else {
                     latitudine.setText("Provider non disponibile");
                     longitudine.setText("Provider non disponibile");
-                    Intent in = new Intent(this, LocationService.class);
+                    /*Intent in = new Intent(this, LocationService.class);
                     in.putExtra("cod", cod);
                     in.putExtra("autista", autista);
                     startService(in);
-
+*/
                    // Toast.makeText(getApplicationContext(), "gps non disp", Toast.LENGTH_LONG).show();
                    start_service();
                 }

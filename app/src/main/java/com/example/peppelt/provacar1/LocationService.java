@@ -1,8 +1,10 @@
 package com.example.peppelt.provacar1;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,6 +12,7 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -21,6 +24,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class LocationService extends Service implements RemoteCallListener<String>{
     static final String ACTION_START ="com.example.peppelt.provacar1.LocationService.ACTION_START";
@@ -40,11 +45,19 @@ public class LocationService extends Service implements RemoteCallListener<Strin
     public void onCreate() {
         Log.i(TAG, "Service onCreate");
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.exemple.provacar1.onDestroy");
-        registerReceiver(receiver, filter);
 
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            Log.i(TAG, "location service su oreo registra broadcast");
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("com.exemple.provacar1.onDestroy");
+            try {
+                registerReceiver(receiver, filter);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
 
+        }
 
 
         SharedPreferences sharedPref= getApplicationContext().getSharedPreferences("posAutista", Context.MODE_PRIVATE);
@@ -104,7 +117,9 @@ public class LocationService extends Service implements RemoteCallListener<Strin
                     e.printStackTrace();
                 }
 
-
+                IntentFilter filter = new IntentFilter();
+                filter.addAction("com.exemple.provacar1.onDestroy");
+                registerReceiver(receiver, filter);
 
             }
 
@@ -117,6 +132,8 @@ public class LocationService extends Service implements RemoteCallListener<Strin
             public void onProviderEnabled(String s) {
 
             }
+
+
 
             @Override
             public void onProviderDisabled(String s) {
@@ -137,6 +154,7 @@ public class LocationService extends Service implements RemoteCallListener<Strin
     public IBinder onBind(Intent intentt) {
         Log.i(TAG, "Service onBind");
 
+
         return null;
     }
 
@@ -144,21 +162,22 @@ public class LocationService extends Service implements RemoteCallListener<Strin
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "Service fake onDestroy");
-        //super.onDestroy();
-/*
-        if(locationManager!=null)
-            locationManager.removeUpdates(listner);
-        Log.i(TAG, "Service onDestroy");
-       */
+        Log.i(TAG, "Service onDestroyy");
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            Log.i(TAG, "location service su oreo");
+            unregisterReceiver(receiver);
+            //super.onDestroy();
+        } else{
+            Log.i(TAG, "location service su api"+ android.os.Build.VERSION.SDK_INT);
+            Destroy();
+        }
     }
     public void Destroy() {
-        super.onDestroy();
-
+        Log.i(TAG, "Service Destroy");
         if(locationManager!=null)
             locationManager.removeUpdates(listner);
         Log.i(TAG, "Service onDestroy");
-
+        super.onDestroy();
     }
 
     @Override
@@ -180,5 +199,7 @@ public class LocationService extends Service implements RemoteCallListener<Strin
 
         }
     };
+
+
 
 }

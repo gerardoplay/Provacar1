@@ -47,6 +47,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.content.ContentValues.TAG;
+
 public class EventoActivity extends Activity implements RemoteCallListener<String>{
 	private int mode;// 1-ric comp   2-per comp 3ric ina 4 per ina 
 	private GoogleMap map;
@@ -410,8 +412,17 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 				}
 				else{
 					//qui bisogna interrompere il serices
-					stopService(new Intent(getApplicationContext(), LocationService.class));
-					sendStopBroadcastMessage();
+ 								//controllo versione android in caso sdk è >= ad oreo il services va bloccato diversamente
+					if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+						sendStopBroadcastMessage();
+						Log.i(TAG, "stop service su oreo");
+					} else{
+						Log.i(TAG, "stop service su < oreo");
+						stopService(new Intent(getApplicationContext(), LocationService.class));
+					}
+
+
+
 					inviaPos.setText("invia posizione");
 				}
 				}
@@ -469,7 +480,7 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 						Toast.makeText(getApplicationContext(), "Feedback Inserito con successo", Toast.LENGTH_LONG).show();
 					else
 						if(contr==6)
-							Toast.makeText(getApplicationContext(), "Feedback gi� inserito: � impossibile inserire pi� feedback lo stesso evento", Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), "Feedback già inserito: è impossibile inserire più feedback lo stesso evento", Toast.LENGTH_LONG).show();
 
 					break;
 				}
@@ -885,21 +896,6 @@ public class EventoActivity extends Activity implements RemoteCallListener<Strin
 		intent.setAction("com.exemple.provacar1.onDestroy");
 		// Put an integer value Intent to broadcast it
 		intent.putExtra("code",1);
-
-                /*
-                    public abstract void sendBroadcast (Intent intent)
-                        Broadcast the given intent to all interested BroadcastReceivers. This call
-                        is asynchronous; it returns immediately, and you will continue executing
-                        while the receivers are run. No results are propagated from receivers and
-                        receivers can not abort the broadcast. If you want to allow receivers to
-                        propagate results or abort the broadcast, you must send an ordered
-                        broadcast using sendOrderedBroadcast(Intent, String).
-
-                    Parameters
-                        intent : The Intent to broadcast; all receivers matching this Intent
-                            will receive the broadcast.
-                */
-		// Finally, send the broadcast
 		sendBroadcast(intent);
 		Toast.makeText(getApplicationContext(), "broadcast message inviato", Toast.LENGTH_LONG).show();
 	}
