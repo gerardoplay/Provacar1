@@ -34,6 +34,7 @@ public class GoogleTransitActivity extends Activity {
     private String partenzalon;
     private String arrivolat;
     private String arrivolon;
+    private String arrival_time;
     //the URL having the json data
     private String JSON_URL = " ";
 
@@ -107,8 +108,13 @@ public class GoogleTransitActivity extends Activity {
                                 JSONObject heroObject = routesArray.getJSONObject(i);
                                 JSONArray legsArray = heroObject.getJSONArray("legs");
                                 for (int j = 0; j < legsArray.length(); j++) {
+
                                     JSONObject legsObject = legsArray.getJSONObject(j);
                                     JSONArray stepsArray = legsObject.getJSONArray("steps");
+                                    // getting arrival time for toast
+                                    JSONObject ArrivalTimeObject = legsObject.getJSONObject("arrival_time");
+                                    arrival_time = ArrivalTimeObject.getString("text");
+
                                     for (int k = 0; k < stepsArray.length(); k++) {
 
                                         JSONObject leg = stepsArray.getJSONObject(k);
@@ -126,9 +132,14 @@ public class GoogleTransitActivity extends Activity {
 
                                         //adding the hero to herolist
                                         datiList.add(dati);
+
+
+
                                     }
                                 }
                             }
+                            Toast.makeText(getApplicationContext(), "arrivo previsto per le ore:" +arrival_time, Toast.LENGTH_LONG).show();
+
 
                             //creating custom adapter object
                             ListViewAdapter adapter = new ListViewAdapter(datiList, getApplicationContext());

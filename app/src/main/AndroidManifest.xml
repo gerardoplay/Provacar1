@@ -82,7 +82,7 @@
 
         <activity
             android:name=".GoogleTransitActivity"
-            android:label="@string/title_activity_trasporto_alternativo" />
+            android:label="Google transit" />
         <activity
             android:name=".PosizioneAutista"
             android:label="@string/title_activity_posizione_autista" />
