@@ -125,9 +125,9 @@ public class DettagliPercorsoAutobusActivity extends Activity implements RemoteC
 
 
 
-    // da qui in avanti sono tutti codici per costruire i tragitti che fa il pullman da un punto all'altro
-    // per farlo si costruisce l'url json con origine detinazione e tutti i punti di mezzo, invia l'url a google e
-    // google restituisce il file json con il tragitto che farà il nostro Autobus, successivamente disegna il tragitto
+        // da qui in avanti sono tutti codici per costruire i tragitti che fa il pullman da un punto all'altro
+        // per farlo si costruisce l'url json con origine detinazione e tutti i punti di mezzo, invia l'url a google e
+        // google restituisce il file json con il tragitto che farà il nostro Autobus, successivamente disegna il tragitto
 
     private String getUrlGMaps() {
         // TODO Auto-generated method stub

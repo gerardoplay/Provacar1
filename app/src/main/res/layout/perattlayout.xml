@@ -57,7 +57,7 @@
 
     <Button
         android:id="@+id/annullaper"
-        android:layout_width="wrap_content"
+        android:layout_width="134dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/partecipanti"
         android:layout_alignParentBottom="true"
@@ -74,7 +74,7 @@
 
     <Button
         android:id="@+id/nav"
-        android:layout_width="wrap_content"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
@@ -92,7 +92,7 @@
     <Button
         android:id="@+id/inviaPosizione"
         style="@android:style/Widget.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="94dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="12dp"

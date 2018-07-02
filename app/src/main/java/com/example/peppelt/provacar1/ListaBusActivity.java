@@ -69,7 +69,7 @@ public class ListaBusActivity extends Activity implements RemoteCallListener<Str
         listView =(ListView) findViewById(R.id.listViewTrasportoAlternativo);
 
 
-         //servlet per i pullman nel nostro database
+        //servlet per i pullman nel nostro database
         RequestHttpAsyncTask rh = new RequestHttpAsyncTask(ListaBusActivity.this);
         try {
             JSONObject js = new JSONObject();

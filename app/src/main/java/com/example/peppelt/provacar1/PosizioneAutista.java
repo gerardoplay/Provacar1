@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONException;
@@ -37,6 +38,7 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
     private GoogleMap map;
     private LatLng latlng;
     private String dataold="";
+    private String dataora="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +133,7 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
         try{
             double lat = Double.parseDouble(new JSONObject(dati).getString("lat").toString());
             double lng = Double.parseDouble(new JSONObject(dati).getString("lng").toString());
-            String dataora = new JSONObject(dati).getString("data");
+            dataora = new JSONObject(dati).getString("data");
 
             if(lat!=0) {
                 latlng = new LatLng(lat, lng);
@@ -154,10 +156,24 @@ public class PosizioneAutista extends Activity implements RemoteCallListener<Str
     protected void aggiornaMappa() {
         // TODO Auto-generated method stub
         map.clear();
-        MarkerOptions mrk = new MarkerOptions().position(latlng);
-        map.addMarker(mrk.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_mark)));
-        map.moveCamera( CameraUpdateFactory.newLatLngZoom(latlng , 13.0f) );
-        //Toast.makeText(getApplicationContext(), "aggiorno la mappa", Toast.LENGTH_LONG).show();
+       // MarkerOptions mrk = new MarkerOptions().position(latlng);
+        map.addMarker(new MarkerOptions()
+                .position(latlng)
+                .title("Posizione autista")
+                .snippet("dati aggiornati al "+dataora)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.car_mark)));
+
+
+        /*map.moveCamera( CameraUpdateFactory.newLatLngZoom(latlng , 13.0f) );
+        Toast.makeText(getApplicationContext(), "aggiorno la mappa", Toast.LENGTH_LONG).show();
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Toast.makeText(getApplicationContext(), "hai cliccato il marker", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
+        */
     }
 
     protected  void richiediPos(){
